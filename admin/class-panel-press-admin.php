@@ -98,6 +98,72 @@ class Panel_Press_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/panel-press-admin.js', array( 'jquery' ), $this->version, false );
 
-	}
+    }
 
+    /**
+	 * Creates a new taxonomy.
+	 *
+	 * @since    1.0.0
+     * @uses register_taxonomy()
+	 */
+
+    public static function register_collection_taxonomy() {
+        register_taxonomy(
+            'pp-collection',
+            'pp-comic',
+            array(
+                'label' => __( 'Collection' ),
+                'rewrite' => array( 'slug' => 'collection' ),
+                'hierarchical' => true,
+                'public' => true,
+                'has_archive' => true,
+                'exclude_from_search' => false,
+                'show_in_rest'  => true,
+            )
+        );
+    }
+
+    /**
+	 * Creates a new custom post type.
+	 *
+	 * @since    1.0.0
+     * @uses register_post_type()
+	 */
+    public static function register_comic_post_type() {
+        $name = 'pp-comic';
+
+        $labels = array(
+            'name'               => _x( 'Comics', 'post type general name' ),
+            'singular_name'      => _x( 'Comic', 'post type singular name' ),
+            'add_new'            => _x( 'Add New', $name ),
+            'add_new_item'       => __( 'Add New Comic' ),
+            'edit_item'          => __( 'Edit Comic' ),
+            'new_item'           => __( 'New Comic' ),
+            'all_items'          => __( 'All Comics' ),
+            'view_item'          => __( 'View Comic' ),
+            'search_items'       => __( 'Search Comics' ),
+            'not_found'          => __( 'No Comics found' ),
+            'not_found_in_trash' => __( 'No Comics found in the Trash' ),
+            'parent_item_colon'  => '',
+            'menu_name'          => 'Comics'
+        );
+
+        $supports = array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'trackbacks', 'comments', 'revisions' );
+        $taxonomies = array( 'pp-collection', 'post_tag');
+
+        $args = array(
+            'labels'        => $labels,
+            'description'   => 'Comic post type.',
+            'public'        => true,
+            'menu_position' => 6,
+            'supports'      => $supports,
+            'taxonomies'    => $taxonomies,
+            'rewrite'       => array( 'slug' => 'comic' ),
+            'menu_icon'     => 'dashicons-index-card',
+            'has_archive'   => true,
+            'show_in_rest'  => true,
+        );
+
+        register_post_type( $name, $args );
+    }
 }
