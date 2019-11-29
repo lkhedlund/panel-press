@@ -30,7 +30,8 @@ class Panel_Press_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
+        // Flush the rewrite on activation
+        flush_rewrite_rules();
 	}
 
 }
