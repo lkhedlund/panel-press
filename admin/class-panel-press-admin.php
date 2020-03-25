@@ -165,5 +165,16 @@ class Panel_Press_Admin {
         );
 
         register_post_type( $name, $args );
-    }
+	}
+
+	/**
+	 * Renames the featured image box to be more relevant to comics.
+	 *
+	 * @since    1.0.0
+     * @uses rename_featured_image_meta_box()
+	 */
+    public static function rename_featured_image_meta_box() {
+    	remove_meta_box( 'postimagediv', 'pp-comic', 'side' );
+    	add_meta_box('postimagediv', __('Comic Image'), 'post_thumbnail_meta_box', 'pp-comic', 'side', 'high');
+	}
 }
