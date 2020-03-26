@@ -11,6 +11,13 @@
  * @package    Panel_Press
  * @subpackage Panel_Press/public/partials
  */
+
+get_header();
 ?>
 
-<h1>Testing</h1>
+<main id="site-content" role="main">
+	<h1>Testing</h1>
+</main><!-- #site-content -->
+
+<?php
+get_footer();
