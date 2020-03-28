@@ -64,7 +64,7 @@ class Panel_Press_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/panel-press-public.css', array(), $this->version, 'all' );
-
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/panel-press-fonts.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -151,5 +151,108 @@ class Panel_Press_Public {
 	
 			echo sprintf($display['before_terms'], $taxonomy_class) . join( $display['separator'], $term_links ) . $display['after_terms'];
 		endif;
+	}
+
+	/**
+	 * Load the comic archive override if template doesn't exist in theme.
+	 *
+	 * @since    1.0.0
+	 */
+	public function get_entry_meta() {
+		$post_meta = array(
+			'author',
+			'post-date',
+			'comments',
+			'sticky',
+		);
+
+		ob_start();
+
+		if ( !empty( $post_meta ) ) : ?>
+
+			<div class="post-meta-wrapper">
+				<ul class="post-meta">
+					<?php
+					// Author.
+					if ( in_array( 'author', $post_meta, true ) ) { ?>
+						<li class="post-author meta-wrapper">
+							<span class="meta-icon">
+								<span class="screen-reader-text"><?php _e( 'Post author', 'panel-press' ); ?></span>
+								<i class="pp-icon-user"></i>
+							</span>
+							<span class="meta-text">
+								<?php
+								printf(
+									/* translators: %s: Author name */
+									__( 'By %s', 'panel-press' ),
+									'<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author_meta( 'display_name' ) ) . '</a>'
+								);
+								?>
+							</span>
+						</li>
+						<?php
+
+					}
+
+					// Post date.
+					if ( in_array( 'post-date', $post_meta, true ) ) { ?>
+						<li class="post-date meta-wrapper">
+							<span class="meta-icon">
+								<span class="screen-reader-text"><?php _e( 'Post date', 'panel-press' ); ?></span>
+								<i class="pp-icon-calendar"></i>
+							</span>
+							<span class="meta-text">
+								<a href="<?php the_permalink(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a>
+							</span>
+						</li>
+						<?php
+
+					}
+
+					// Comments link.
+					if ( in_array( 'comments', $post_meta, true ) && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+
+						$has_meta = true;
+						?>
+						<li class="post-comment-link meta-wrapper">
+							<span class="meta-icon">
+								<i class="pp-icon-message-square"></i>
+							</span>
+							<span class="meta-text">
+								<?php comments_popup_link(); ?>
+							</span>
+						</li>
+						<?php
+
+					}
+
+					// Sticky.
+					if ( in_array( 'sticky', $post_meta, true ) && is_sticky() ) {
+
+						$has_meta = true;
+						?>
+						<li class="post-sticky meta-wrapper">
+							<span class="meta-icon">
+								<i class="pp-icon-bookmark"></i>
+							</span>
+							<span class="meta-text">
+								<?php _e( 'Sticky post', 'panel-press' ); ?>
+							</span>
+						</li>
+						<?php
+
+					}
+					?>
+
+				</ul><!-- .post-meta -->
+
+			</div><!-- .post-meta-wrapper -->
+
+		<?php
+		endif;
+
+		$meta_output = ob_get_clean();
+
+		echo $meta_output;
 	}
 }

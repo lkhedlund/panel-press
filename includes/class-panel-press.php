@@ -178,6 +178,7 @@ class Panel_Press {
 
 		// Template hooks
 		$this->loader->add_action( 'pp_display_collections', $plugin_public, 'display_collections', 10, 1);
+		$this->loader->add_action( 'pp_entry_meta', $plugin_public, 'get_entry_meta', 10);
 	}
 
 	/**
