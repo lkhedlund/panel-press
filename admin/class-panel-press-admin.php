@@ -168,10 +168,10 @@ class Panel_Press_Admin {
 	}
 	
 	/**
-	 * Order comic posts in main archive.
+	 * Reorder comic posts in the Collection category archive.
 	 *
 	 * @since    1.0.0
-     * @uses is_post_type_archive(), is_tax()
+     * @uses is_tax()
 	 */
 	public static function pre_get_comics( $query ) {
 		if ( $query->is_main_query() && !is_admin() ) {

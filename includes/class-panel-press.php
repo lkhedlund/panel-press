@@ -160,6 +160,7 @@ class Panel_Press {
 		$this->loader->add_action( 'init', $plugin_admin, 'register_comic_post_type' );
 		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'pre_get_comics' );
 		$this->loader->add_filter( 'archive_template', $plugin_public, 'load_comic_archive_template' );
+		// $this->loader->add_filter( 'category_template', $plugin_public, 'load_collection_category_template' );
 	}
 
 	/**
