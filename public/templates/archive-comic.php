@@ -22,8 +22,12 @@ get_header();
 		 *
 		 * @hooked get_pp_collection_categories - 10 (outputs collections)
 		 */
-		do_action( 'pp_before_main_content' );
+		// do_action( 'pp_before_main_content' );
 	?>
+	<?php wp_list_categories (array(
+		'taxonomy' => 'pp-collection',
+		'title_li' => __('Collections', 'panel-press'),
+	)); ?>
 	<?php if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : ?>
 			<?php the_post(); ?>
