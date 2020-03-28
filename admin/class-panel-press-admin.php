@@ -165,5 +165,19 @@ class Panel_Press_Admin {
         );
 
         register_post_type( $name, $args );
-    }
+	}
+	
+	/**
+	 * Creates a new custom post type.
+	 *
+	 * @since    1.0.0
+     * @uses is_post_type_archive(), is_tax()
+	 */
+	public static function pre_get_comics( $query ) {
+		if ( $query->is_main_query() && !is_admin() ) {
+			if ( $query->is_tax('pp-collection') || $query->is_post_type_archive('pp-comic') ) {
+				$query->set('order', 'ASC'); 
+			}       
+		}
+	} 
 }
