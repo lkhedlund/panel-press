@@ -111,10 +111,9 @@ class Panel_Press_Public {
     	$exists_in_theme = locate_template('archive-pp-comic.php', false);
 
     	if (!$exists_in_theme && $post->post_type == "pp-comic") {
-        	return plugin_dir_path( __FILE__ ) . "partials/archive-comic.php";
+        	return plugin_dir_path( __FILE__ ) . "templates/archive-comic.php";
     	}
 
     	return $template;
 	}
-
 }
