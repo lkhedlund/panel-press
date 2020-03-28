@@ -17,8 +17,12 @@ get_header();
 
 <main id="site-content" role="main">
     <?php
-   		# Show main categories for the collection first for easier navigation.
-		echo get_pp_collection_categories();
+		/**
+		 * pp_before_main_content hook.
+		 *
+		 * @hooked get_pp_collection_categories - 10 (outputs collections)
+		 */
+		do_action( 'pp_before_main_content' );
 	?>
 	<?php if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : ?>

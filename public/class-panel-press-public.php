@@ -116,4 +116,34 @@ class Panel_Press_Public {
 
     	return $template;
 	}
+
+	/**
+	 * Get the categories in a heirarchal list like wp_list_categories().
+	 * 
+	 * @since    1.0.0
+	 */
+	public function get_pp_collection_categories($category = 0) {
+		$r = '';
+
+		$args = array(
+			'parent' => $category,
+		);
+
+		$next = get_terms('pp-collection', $args);
+
+		if ($next) {
+			$r .= '<ul>';
+
+			foreach ($next as $cat) {
+				$r .= '<li><a href="' . get_term_link($cat->slug, $cat->taxonomy) . '" title="' . sprintf(__("View all products in %s"), $cat->name) . '" ' . '>' . $cat->name . ' (' . $cat->count . ')' . '</a>';
+				$r .= $cat->term_id !== 0 ? $this->get_pp_collection_categories($cat->term_id) : null;
+			}
+			$r .= '</li>';
+
+			$r .= '</ul>';
+		}
+
+		echo $r;
+	}
+
 }
