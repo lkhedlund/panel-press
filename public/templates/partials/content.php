@@ -16,15 +16,11 @@
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
     <header>
-        <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+        <?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '">', '</a></h2>' ); ?>
         <div class="entry-meta">
-            <?php 
-               /**
-                * pp_entry_meta hook.
-                *
-                * @hooked display_collections (output the collection this belongs to) - 10
-                */
-                do_action( 'pp_entry_meta', ['limit' => 1] );
+            <?php
+                # Display the collection categories, limited to one. 
+                do_action( 'pp_display_collections', ['limit' => 1] );
             ?>
         </div>
     </header>
