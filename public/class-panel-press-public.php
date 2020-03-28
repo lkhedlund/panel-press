@@ -98,4 +98,21 @@ class Panel_Press_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/panel-press-public.js', array( 'jquery' ), $this->version, false );
 	}
+
+	/**
+	 * Load the comic archive override if template doesn't exist in theme.
+	 *
+	 * @since    1.0.0
+	 */
+	public function load_comic_archive_template($template) {
+		global $post;
+
+    	$exists_in_theme = locate_template('archive-pp-comic.php', false);
+
+    	if (!$exists_in_theme && $post->post_type == "pp-comic") {
+        	return plugin_dir_path( __FILE__ ) . "templates/archive-comic.php";
+    	}
+
+    	return $template;
+	}
 }
