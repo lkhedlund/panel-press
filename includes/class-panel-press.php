@@ -156,9 +156,10 @@ class Panel_Press {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-        $this->loader->add_action( 'init', $plugin_admin, 'register_collection_taxonomy');
-		$this->loader->add_action( 'init', $plugin_admin, 'register_comic_post_type');
-		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'pre_get_comics');
+        $this->loader->add_action( 'init', $plugin_admin, 'register_collection_taxonomy' );
+		$this->loader->add_action( 'init', $plugin_admin, 'register_comic_post_type' );
+		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'pre_get_comics' );
+		$this->loader->add_filter( 'archive_template', $plugin_public, 'load_comic_archive_template' );
 	}
 
 	/**
@@ -174,8 +175,6 @@ class Panel_Press {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
-		$this->loader->add_filter('archive_template', $plugin_public, 'load_comic_archive_template');
 
 		// Template hooks
 		// $this->loader->add_action('pp_before_main_content', $plugin_public, 'get_pp_collection_categories');

@@ -168,16 +168,33 @@ class Panel_Press_Admin {
 	}
 	
 	/**
-	 * Creates a new custom post type.
+	 * Order comic posts in main archive.
 	 *
 	 * @since    1.0.0
      * @uses is_post_type_archive(), is_tax()
 	 */
 	public static function pre_get_comics( $query ) {
 		if ( $query->is_main_query() && !is_admin() ) {
-			if ( $query->is_tax('pp-collection') || $query->is_post_type_archive('pp-comic') ) {
+			if ( $query->is_tax('pp-collection') ) {
 				$query->set('order', 'ASC'); 
 			}       
 		}
-	} 
+	}
+
+	/**
+	 * Load the comic archive override if template doesn't exist in theme.
+	 *
+	 * @since    1.0.0
+	 */
+	public function load_comic_archive_template($template) {
+		global $post;
+
+    	$exists_in_theme = locate_template('archive-pp-comic.php', false);
+
+    	if (!$exists_in_theme && $post->post_type == "pp-comic") {
+        	return plugin_dir_path( __FILE__ ) . "templates/archive-comic.php";
+    	}
+
+    	return $template;
+	}
 }
