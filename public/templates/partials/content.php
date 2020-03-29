@@ -2,7 +2,7 @@
 /**
  * The default template for displaying content
  *
- * Used for both singular and index.
+ * Used for index.
  *
  *
  * @link       https://iskotaa.com

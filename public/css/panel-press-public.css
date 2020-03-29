@@ -4,6 +4,19 @@
  */
 
 /* Archive */
+.pp-archive .archive-header {
+    text-align: center;
+}
+
+.pp-collection-terms-list {
+    list-style: none;
+    text-align: center;
+}
+
+.pp-collection > ul {
+    list-style: none;
+}
+
 article.pp-comic {
     max-width: 900px;
     margin-left: auto;
