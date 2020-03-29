@@ -4,6 +4,10 @@
  */
 
 /* Archive */
+.pp-archive {
+    padding-bottom: 2rem;
+}
+
 .pp-archive .archive-header {
     text-align: center;
 }
