@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'panel-press-icons';
   src:
-    url('fonts/panel-press-icons.ttf?sb3o1w') format('truetype'),
-    url('fonts/panel-press-icons.woff?sb3o1w') format('woff'),
-    url('fonts/panel-press-icons.svg?sb3o1w#panel-press-icons') format('svg');
+    url('../fonts/panel-press-icons.ttf?sb3o1w') format('truetype'),
+    url('../fonts/panel-press-icons.woff?sb3o1w') format('woff'),
+    url('../fonts/panel-press-icons.svg?sb3o1w#panel-press-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;

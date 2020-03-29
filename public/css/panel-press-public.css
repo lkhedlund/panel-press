@@ -15,3 +15,14 @@ article.pp-comic {
 .pp-comic img {
     display: inline-block;
 }
+
+.entry-title,
+.entry-meta {
+    margin-bottom: 1rem;
+}
+
+.entry-meta .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

@@ -17,10 +17,7 @@
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
     <header>
         <?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '">', '</a></h2>' ); ?>
-        <div class="entry-meta">
-            <?php do_action( 'pp_display_collections', ['limit' => 1] ); ?>
-            <?php do_action( 'pp_entry_meta' ); ?>
-        </div>
+        <?php do_action( 'pp_entry_meta' ); ?>
     </header>
     <?php if (has_post_thumbnail()) : ?>
         <figure class="entry-figure">

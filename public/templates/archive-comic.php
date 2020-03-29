@@ -24,7 +24,7 @@ get_header();
 		 */
 		// do_action( 'pp_before_main_content' );
 	?>
-	<?php wp_list_categories (array(
+	<?php wp_list_categories(array(
 		'taxonomy' => 'pp-collection',
 		'title_li' => __('Collections', 'panel-press'),
 	)); ?>

@@ -159,8 +159,8 @@ class Panel_Press_Public {
 	 * @since    1.0.0
 	 */
 	public function get_entry_meta() {
+		// Supports author, post-date, category, comments, and sticky
 		$post_meta = array(
-			'author',
 			'post-date',
 			'category',
 			'comments',
@@ -171,7 +171,7 @@ class Panel_Press_Public {
 
 		if ( !empty( $post_meta ) ) : ?>
 
-			<div class="post-meta-wrapper">
+			<div class="entry-meta">
 				<ul class="post-meta">
 					<?php
 					// Author.
@@ -214,11 +214,11 @@ class Panel_Press_Public {
 					if ( in_array( 'category', $post_meta, true ) ) { ?>
 						<li class="post-date meta-wrapper">
 							<span class="meta-icon">
-								<span class="screen-reader-text"><?php _e( 'Post date', 'panel-press' ); ?></span>
-								<i class="pp-icon pp-icon-calendar"></i>
+								<span class="screen-reader-text"><?php _e( 'Collection', 'panel-press' ); ?></span>
+								<i class="pp-icon pp-icon-tag"></i>
 							</span>
 							<span class="meta-text">
-								<a href="<?php the_permalink(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a>
+								<?php do_action( 'pp_display_collections', ['limit' => 1] ); ?>
 							</span>
 						</li>
 						<?php
