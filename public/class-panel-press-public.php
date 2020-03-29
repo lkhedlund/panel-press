@@ -64,7 +64,7 @@ class Panel_Press_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/panel-press-public.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/panel-press-fonts.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name . '/fonts', plugin_dir_url( __FILE__ ) . 'css/panel-press-fonts.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -162,6 +162,7 @@ class Panel_Press_Public {
 		$post_meta = array(
 			'author',
 			'post-date',
+			'category',
 			'comments',
 			'sticky',
 		);
@@ -178,7 +179,7 @@ class Panel_Press_Public {
 						<li class="post-author meta-wrapper">
 							<span class="meta-icon">
 								<span class="screen-reader-text"><?php _e( 'Post author', 'panel-press' ); ?></span>
-								<i class="pp-icon-user"></i>
+								<i class="pp-icon pp-icon-user"></i>
 							</span>
 							<span class="meta-text">
 								<?php
@@ -199,7 +200,22 @@ class Panel_Press_Public {
 						<li class="post-date meta-wrapper">
 							<span class="meta-icon">
 								<span class="screen-reader-text"><?php _e( 'Post date', 'panel-press' ); ?></span>
-								<i class="pp-icon-calendar"></i>
+								<i class="pp-icon pp-icon-calendar"></i>
+							</span>
+							<span class="meta-text">
+								<a href="<?php the_permalink(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a>
+							</span>
+						</li>
+						<?php
+
+					}
+
+					// Category
+					if ( in_array( 'category', $post_meta, true ) ) { ?>
+						<li class="post-date meta-wrapper">
+							<span class="meta-icon">
+								<span class="screen-reader-text"><?php _e( 'Post date', 'panel-press' ); ?></span>
+								<i class="pp-icon pp-icon-calendar"></i>
 							</span>
 							<span class="meta-text">
 								<a href="<?php the_permalink(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a>
@@ -216,7 +232,7 @@ class Panel_Press_Public {
 						?>
 						<li class="post-comment-link meta-wrapper">
 							<span class="meta-icon">
-								<i class="pp-icon-message-square"></i>
+								<i class="pp-icon pp-icon-message-square"></i>
 							</span>
 							<span class="meta-text">
 								<?php comments_popup_link(); ?>
@@ -233,7 +249,7 @@ class Panel_Press_Public {
 						?>
 						<li class="post-sticky meta-wrapper">
 							<span class="meta-icon">
-								<i class="pp-icon-bookmark"></i>
+								<i class="pp-icon pp-icon-bookmark"></i>
 							</span>
 							<span class="meta-text">
 								<?php _e( 'Sticky post', 'panel-press' ); ?>

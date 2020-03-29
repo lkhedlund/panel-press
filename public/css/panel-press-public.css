@@ -2,3 +2,16 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+/* Archive */
+article.pp-comic {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.pp-comic img {
+    display: inline-block;
+}
