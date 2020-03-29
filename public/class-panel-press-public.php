@@ -111,7 +111,7 @@ class Panel_Press_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function display_collections($args = array()) {
+	public function get_collection($args = array()) {
 		$defaults = array(
 			'taxonomy'      => 'pp-collection',
 			'separator'     => ', ',
@@ -218,7 +218,7 @@ class Panel_Press_Public {
 								<i class="pp-icon pp-icon-tag"></i>
 							</span>
 							<span class="meta-text">
-								<?php do_action( 'pp_display_collections', ['limit' => 1] ); ?>
+								<?php do_action( 'pp_get_collection', ['limit' => 1] ); ?>
 							</span>
 						</li>
 						<?php
@@ -268,6 +268,33 @@ class Panel_Press_Public {
 		endif;
 
 		$meta_output = ob_get_clean();
+
+		echo $meta_output;
+	}
+
+	/**
+	 * Load a dropdown with all of the collections.
+	 * 
+	 * FIXME: URL not working. Need to look into this more later.
+	 *
+	 * @since    1.0.0
+	 */
+	public function collections_dropdown($args = array()) {
+		ob_start(); ?>
+
+		<section class="pp-collection">
+			<h4 class="pp-collection-title"><i class="pp-icon pp-icon-folder"></i><?=  __('Collections', 'panel-press'); ?></h4>
+			<form id="pp-collection-select" class="pp-collection-form" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="get">
+				<?php wp_dropdown_categories(array(
+					'show_option_all' => 'All',
+					'taxonomy' => 'pp-collection',
+					'echo' => true,
+				)); ?>
+				<input type="submit" name="submit" value="view" />
+			</form>
+		</section>
+
+		<?php $meta_output = ob_get_clean();
 
 		echo $meta_output;
 	}

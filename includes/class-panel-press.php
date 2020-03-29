@@ -177,7 +177,7 @@ class Panel_Press {
 		$this->loader->add_filter( 'archive_template', $plugin_public, 'load_comic_archive_template' );
 
 		// Template hooks
-		$this->loader->add_action( 'pp_display_collections', $plugin_public, 'display_collections', 10, 1);
+		$this->loader->add_action( 'pp_get_collection', $plugin_public, 'get_collection', 10, 1);
 		$this->loader->add_action( 'pp_entry_meta', $plugin_public, 'get_entry_meta', 10);
 	}
 

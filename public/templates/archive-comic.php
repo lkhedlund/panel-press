@@ -63,13 +63,6 @@ $archive_class = apply_filters( 'pp_archive_classes', 'pp-archive' );
 			</div>
 		</header>
 	<?php endif; ?>
-	<ul class="pp-collection-terms-list">
-		<?php wp_list_categories(array(
-			'show_option_all' => 'All',
-			'taxonomy' => 'pp-collection',
-			'title_li' => '<h4 class="pp-collection-title"><i class="pp-icon pp-icon-folder"></i> ' . __('Collections', 'panel-press') . '</h4>',
-		)); ?>
-	</ul>
 	<?php if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : ?>
 			<?php the_post(); ?>
