@@ -21,7 +21,7 @@
     list-style: none;
 }
 
-article.pp-comic {
+.pp-archive article {
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
@@ -29,7 +29,7 @@ article.pp-comic {
     padding-bottom: 2rem;
 }
 
-.pp-comic img {
+.pp-archive article img {
     display: inline-block;
 }
 
