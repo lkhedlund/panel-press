@@ -315,10 +315,10 @@ class Panel_Press_Public {
             'last' => get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID
         );
         ?>
-        <section class="pp-pagination">
+        <div class="pp-pagination">
             <?php
             foreach ( $comic_ids as $key => $value ) {
-                if ( $value !== get_the_id() ) {
+                if ( $value !== get_the_id() && ! empty($value) ) {
                     echo sprintf(
                         '<a href="%1$s">%2$s</a>',
 						esc_url( get_permalink( $value ) ),
@@ -327,7 +327,7 @@ class Panel_Press_Public {
                 }
             }
             ?>
-        </section>
+        </div>
 
 		<?php $output = ob_get_clean();
 

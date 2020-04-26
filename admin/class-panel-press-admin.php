@@ -175,9 +175,13 @@ class Panel_Press_Admin {
 	 */
 	public static function pre_get_comics( $query ) {
 		if ( $query->is_main_query() && !is_admin() ) {
-			if ( $query->is_tax('pp-collection') ) {
-				$query->set('order', 'ASC'); 
-			}       
+            if ( 'pp-comic' === $query->get('post_type') ) {
+                $query->set('posts_per_page', 1);
+            }
+
+            if ( $query->is_tax('pp-collection') ) {
+                $query->set('order', 'ASC');
+            } 
 		}
 	}
 }
