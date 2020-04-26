@@ -297,5 +297,40 @@ class Panel_Press_Public {
 		<?php $meta_output = ob_get_clean();
 
 		echo $meta_output;
-	}
+    }
+    
+    /**
+	 * Get the pagination to use for navigating between comic posts.
+	 *
+	 * @since    1.0.0
+	 */
+	public function the_comics_pagination($args = array()) {
+        ob_start();
+        get_the_id();
+
+        $comic_ids = array(
+            'first' => get_posts( 'numberposts=1&order=ASC&post_type=pp-comic' )[0]->ID,
+            'previous' => get_adjacent_post(false, '', true)->ID,
+            'next' => get_adjacent_post(false, '',false)->ID,
+            'last' => get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID
+        );
+        ?>
+        <section class="pp-pagination">
+            <?php
+            foreach ( $comic_ids as $key => $value ) {
+                if ( $value !== get_the_id() ) {
+                    echo sprintf(
+                        '<a href="%1$s">%2$s</a>',
+						esc_url( get_permalink( $value ) ),
+                        esc_html( $key ),
+                    );
+                }
+            }
+            ?>
+        </section>
+
+		<?php $output = ob_get_clean();
+
+		echo $output;
+    }
 }
