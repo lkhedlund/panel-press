@@ -13,11 +13,9 @@
  */
 
 get_header();
-
-$archive_class = apply_filters( 'pp_archive_classes', 'pp-archive' );
 ?>
 
-<main id="site-content" role="main" class="<?= $archive_class; ?>">
+<main id="site-content" role="main">
 	<?php if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : ?>
 			<?php the_post(); ?>
@@ -25,5 +23,6 @@ $archive_class = apply_filters( 'pp_archive_classes', 'pp-archive' );
 		<?php endwhile; ?>
 	<?php endif; ?>
 </main><!-- #site-content -->
+
 <?php
 get_footer();

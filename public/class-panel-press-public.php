@@ -90,17 +90,17 @@ class Panel_Press_Public {
 	}
 
 	/**
-	 * Load the comic archive override if template doesn't exist in theme.
+	 * Load the comic single override if template doesn't exist in theme.
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_comic_archive_template($template) {
+	public function load_comic_single_template($template) {
 		global $post;
 
-    	$exists_in_theme = locate_template('archive-pp-comic.php', false);
+    	$exists_in_theme = locate_template('single-pp-comic.php', false);
 
     	if (!$exists_in_theme && $post->post_type == "pp-comic") {
-        	return plugin_dir_path( __FILE__ ) . "templates/archive-comic.php";
+        	return plugin_dir_path( __FILE__ ) . "templates/single-comic.php";
     	}
 
     	return $template;
@@ -331,7 +331,7 @@ class Panel_Press_Public {
             ),
         );
         ?>
-        <div class="pp-pagination">
+        <nav class="pp-pagination" aria-label="Comic" role="navigation">
             <?php
             foreach ( $comic_links as $link ) {
                 if ( $link['ID'] !== get_the_id() && ! empty($link['ID']) ) {
@@ -345,7 +345,7 @@ class Panel_Press_Public {
                 }
             }
             ?>
-        </div>
+        </nav>
 
 		<?php $output = ob_get_clean();
 

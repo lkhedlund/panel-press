@@ -171,7 +171,7 @@ class Panel_Press_Admin {
 	 * Reorder comic posts in the Collection category archive.
 	 *
 	 * @since    1.0.0
-     * @uses is_tax()
+     * @uses is_tax(), is_main_query(), is_admin(), get(), set()
 	 */
 	public static function pre_get_comics( $query ) {
 		if ( $query->is_main_query() && !is_admin() ) {
@@ -183,5 +183,21 @@ class Panel_Press_Admin {
                 $query->set('order', 'ASC');
             } 
 		}
-	}
+    }
+
+    /**
+	 * Redirect to first post when hitting the archive.
+	 *
+	 * @since    1.0.0
+     * @uses is_post_type_archive(), get_posts(), wp_redirect(), get_permalink()
+	 */
+	public static function redirect_comic_archive() {
+        if ( is_post_type_archive( 'pp-comic' ) ) {
+            $latest_id = get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID;
+            if ( ! empty($latest_id) ) {
+                wp_redirect( get_permalink($latest_id), 301 );
+            }
+            exit();
+        }
+    }
 }
