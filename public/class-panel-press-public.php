@@ -215,7 +215,7 @@ class Panel_Press_Public {
 						<li class="post-date meta-wrapper">
 							<span class="meta-icon">
 								<span class="screen-reader-text"><?php _e( 'Collection', 'panel-press' ); ?></span>
-								<i class="pp-icon pp-icon-tag"></i>
+								<i class="pp-icon pp-icon-book"></i>
 							</span>
 							<span class="meta-text">
 								<?php do_action( 'pp_get_collection', ['limit' => 1] ); ?>
@@ -308,21 +308,39 @@ class Panel_Press_Public {
         ob_start();
         get_the_id();
 
-        $comic_ids = array(
-            'first' => get_posts( 'numberposts=1&order=ASC&post_type=pp-comic' )[0]->ID,
-            'previous' => get_adjacent_post(false, '', true)->ID,
-            'next' => get_adjacent_post(false, '',false)->ID,
-            'last' => get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID
+        $comic_links = array(
+            'first' => array(
+                'ID' => get_posts( 'numberposts=1&order=ASC&post_type=pp-comic' )[0]->ID,
+                'icon' => 'chevrons-left',
+                'title' => 'First'
+            ),
+            'previous' => array(
+                'ID' => get_adjacent_post(false, '', true)->ID,
+                'icon' => 'chevron-left',
+                'title' => 'Previous'
+            ),
+            'next' => array(
+                'ID' => get_adjacent_post(false, '',false)->ID,
+                'icon' => 'chevron-right',
+                'title' => 'Next'
+            ),
+            'last' => array(
+                'ID' => get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID,
+                'icon' => 'chevrons-right',
+                'title' => 'Last'
+            ),
         );
         ?>
         <div class="pp-pagination">
             <?php
-            foreach ( $comic_ids as $key => $value ) {
-                if ( $value !== get_the_id() && ! empty($value) ) {
+            foreach ( $comic_links as $link ) {
+                if ( $link['ID'] !== get_the_id() && ! empty($link['ID']) ) {
                     echo sprintf(
-                        '<a href="%1$s">%2$s</a>',
-						esc_url( get_permalink( $value ) ),
-                        esc_html( $key ),
+                        '<a href="%1$s" class="pp-pagination-link pp-pagination-link-%2$s"><i class="pp-icon pp-icon-%3$s"></i><span class="pagination-text">%4$s</span></a>',
+						esc_url( get_permalink( $link['ID'] ) ),
+                        esc_attr( strtolower( $link['title'] ) ),
+                        esc_attr( $link['icon'] ),
+                        esc_html( $link['title'] )
                     );
                 }
             }
