@@ -22,7 +22,7 @@
     <?php do_action( 'pp_comics_pagination' ); ?>
     <?php if (has_post_thumbnail()) : ?>
         <figure class="entry-figure">
-            <?php the_post_thumbnail('large'); ?>
+            <?php the_post_thumbnail('full'); ?>
         </figure>
     <?php endif; ?>
     <?php do_action( 'pp_comics_pagination' ); ?>

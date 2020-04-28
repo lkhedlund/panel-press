@@ -43,3 +43,40 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+/* Pagination */
+.pp-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pp-pagination-link {
+    flex: 0 1 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    text-decoration: none;
+}
+
+.pp-icon {
+    margin-left: 5px;
+}
+
+.pp-pagination-link-next,
+.pp-pagination-link-last {
+    flex-direction: row-reverse;
+}
+
+/* Single */
+.pp-comic header {
+    text-align: center;
+}
+
+.pp-comic .entry-figure {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
