@@ -53,12 +53,22 @@
 }
 
 .pp-pagination-link {
-    flex: 0 1 120px;
+    flex: 0 1 150px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
-    text-decoration: none;
+    text-decoration: none; 
+}
+
+@media (max-width: 575.98px) {
+    .pagination-text {
+        display: none;
+    }
+
+    .pp-pagination-link {
+        font-size: 3rem;
+    }
 }
 
 .pp-icon {
