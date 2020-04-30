@@ -181,6 +181,7 @@ class Panel_Press {
 		$this->loader->add_action( 'pp_get_collection', $plugin_public, 'get_collection', 10, 1);
         $this->loader->add_action( 'pp_entry_meta', $plugin_public, 'get_entry_meta', 10);
         $this->loader->add_action( 'pp_comics_pagination', $plugin_public, 'the_comics_pagination', 10);
+        $this->loader->add_shortcode( 'pp-latest-comic', $plugin_public, 'latest_comic_shortcode' );
 	}
 
 	/**

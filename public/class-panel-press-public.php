@@ -351,4 +351,48 @@ class Panel_Press_Public {
 
 		echo $output;
     }
+
+    /**
+	 * Display the latest comic as a shortcode.
+	 *
+	 * @since    1.0.0
+	 */
+	public function latest_comic_shortcode() {
+        ob_start();
+        get_the_id();
+        // define query parameters based on attributes
+        $options = array(
+            'post_type' => 'pp-comic',
+            'posts_per_page' => 1,
+            'post_status' => 'publish',
+        );
+        $query = new WP_Query( $options );
+        // run the loop based on the query
+        $i = 0;
+        if ($query->have_posts()) { ?>
+            <?php while ( $query->have_posts() ) : $i++; $total = $query->found_posts; $query->the_post(); ?>
+                <article <?php post_class('pp-latest-comic'); ?>>
+                <?php if (has_post_thumbnail()) : ?>
+                    <figure class="pp-comic-figure">
+                        <?php the_post_thumbnail('post-thumbnail', ['class' => 'pp-comic-image']); ?>
+                </figure>
+                <?php endif; ?>
+                <div class="pp-comic-body">
+                    <div class="pp-comic-body-info">
+                        <h2><?php the_title(); ?></h2>
+                        <p class="pp-comic-body-details"><time class="updated" datetime="<?= get_post_time('c', true); ?>"><?= get_the_date('M d Y'); ?></time></p>
+                        <p class="pp-comic-body-excerpt"><?= get_the_excerpt(); ?></p>
+                    </div>
+                    <div class="pp-comic-actions">
+                        <a class="pp-comic-link button" href="<?php the_permalink(); ?>">Read More</a>
+                    </div>
+                </div>
+            </article>
+            <?php
+                endwhile;
+                wp_reset_postdata(); ?>
+            <?php $output = ob_get_clean();
+            return $output;
+        }
+    }
 }

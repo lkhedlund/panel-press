@@ -15,6 +15,5 @@
 * @return html object
 */
 function pp_display_collections($args = array()){
-
     return Panel_Press_Public::display_collections($args);
 }
