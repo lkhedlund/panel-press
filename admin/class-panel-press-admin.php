@@ -148,7 +148,7 @@ class Panel_Press_Admin {
             'menu_name'          => 'Comics'
         );
 
-        $supports = array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'trackbacks', 'comments', 'revisions' );
+        $supports = array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'trackbacks', 'comments', 'revisions', 'publicize' );
         $taxonomies = array( 'pp-collection', 'post_tag');
 
         $args = array(
