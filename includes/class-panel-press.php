@@ -120,9 +120,15 @@ class Panel_Press {
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-panel-press-public.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-panel-press-public.php';
+        
+        /**
+		 * The class responsible for adding meta boxes to the admin.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-panel-press-meta-box.php';
 
-		$this->loader = new Panel_Press_Loader();
+        $this->loader = new Panel_Press_Loader();
+        $this->loader = new Panel_Press_Meta_Box();
 
 	}
 
