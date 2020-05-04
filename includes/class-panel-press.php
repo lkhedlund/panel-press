@@ -160,6 +160,8 @@ class Panel_Press {
 		$this->loader->add_action( 'init', $plugin_admin, 'register_comic_post_type' );
         $this->loader->add_action( 'pre_get_posts', $plugin_admin, 'pre_get_comics' );
         $this->loader->add_filter( 'template_redirect', $plugin_admin, 'redirect_comic_archive' );
+        $this->loader->add_filter( 'the_excerpt_rss', $plugin_admin,'add_featured_image_to_feeds' );
+        $this->loader->add_filter( 'the_content_feed', $plugin_admin, 'add_featured_image_to_feeds' );
 	}
 
 	/**

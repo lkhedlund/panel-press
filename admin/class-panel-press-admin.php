@@ -200,4 +200,17 @@ class Panel_Press_Admin {
             exit();
         }
     }
+
+    /**
+	 * Add featured image to RSS feed.
+	 *
+	 * @since    1.0.0
+	 */
+    public static function add_featured_image_to_feeds( $content ) {
+        global $post;
+        if( has_post_thumbnail( $post->ID ) ) {
+            $content = '<p>' . get_the_post_thumbnail( $post->ID ) . '</p>' . $content;
+        }
+        return $content;
+    }
 }
