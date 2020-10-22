@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Panel Press
  * Plugin URI:        https://iskotaa.com/project/panel-press
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Use Panel Press to upload comics to your wordpress site!
  * Version:           1.0.0
  * Author:            Lars
  * Author URI:        https://iskotaa.com
