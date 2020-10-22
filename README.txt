@@ -19,7 +19,7 @@ This plugin creates a new "comic" post type to organize and upload your comics t
 Currently built for the 2020 theme, with other support coming in the future.
 
 == Installation ==
-1. Upload `panel-press.php` to the `/wp-content/plugins/` directory
+1. Download the Zip file from Github in the "Code" section and upload it through the plugin area of the admin dashboard or to wp-content/plugins through FTP.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Create new comics posts and collections in the "Comics" section of the admin area.
 
