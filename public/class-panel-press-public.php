@@ -107,7 +107,7 @@ class Panel_Press_Public {
 	}
 
 	/**
-	 * Load the comic archive override if template doesn't exist in theme.
+	 * Get the collection taxonomy and display.
 	 *
 	 * @since    1.0.0
 	 */
@@ -218,7 +218,7 @@ class Panel_Press_Public {
 								<i class="pp-icon pp-icon-book"></i>
 							</span>
 							<span class="meta-text">
-								<?php do_action( 'pp_get_collection', ['limit' => 1] ); ?>
+								<?php do_action( 'pp_get_collection', ['limit' => 2] ); ?>
 							</span>
 						</li>
 						<?php
