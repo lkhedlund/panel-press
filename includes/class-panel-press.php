@@ -58,6 +58,16 @@ class Panel_Press {
 	protected $version;
 
 	/**
+	 * The default plugin options.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $version    The default plugin options.
+	 */
+	protected $plugin_options;
+
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -76,9 +86,9 @@ class Panel_Press {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->set_plugin_options();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -144,6 +154,22 @@ class Panel_Press {
 	}
 
 	/**
+	 * Define the default plugin options.
+	 *
+	 * Defines the plugin options to be gathered and set in the theme options page (coming soon)
+	 *
+	 * @since    1.0.1
+	 * @access   private
+	 */
+	private function set_plugin_options() {
+		// TODO: Refactor with enum support in 8.1
+
+		$this->plugin_options = [
+			'format' => 'issue', // strip
+		]
+	}
+
+	/**
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
@@ -152,14 +178,14 @@ class Panel_Press {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Panel_Press_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Panel_Press_Admin( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_options() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-        $this->loader->add_action( 'init', $plugin_admin, 'register_collection_taxonomy' );
+    $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+    $this->loader->add_action( 'init', $plugin_admin, 'register_collection_taxonomy' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_comic_post_type' );
-        $this->loader->add_action( 'pre_get_posts', $plugin_admin, 'pre_get_comics' );
-        $this->loader->add_filter( 'template_redirect', $plugin_admin, 'redirect_comic_archive' );
+    $this->loader->add_action( 'pre_get_posts', $plugin_admin, 'pre_get_comics' );
+    $this->loader->add_filter( 'template_redirect', $plugin_admin, 'redirect_comic_archive' );
 	}
 
 	/**
@@ -171,17 +197,17 @@ class Panel_Press {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Panel_Press_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Panel_Press_Public( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_options() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-        $this->loader->add_filter( 'single_template', $plugin_public, 'load_comic_single_template' );
+    $this->loader->add_filter( 'single_template', $plugin_public, 'load_comic_single_template' );
 
 		// Template hooks
 		$this->loader->add_action( 'pp_get_collection', $plugin_public, 'get_collection', 10, 1);
-        $this->loader->add_action( 'pp_entry_meta', $plugin_public, 'get_entry_meta', 10);
-        $this->loader->add_action( 'pp_comics_pagination', $plugin_public, 'the_comics_pagination', 10);
-        $this->loader->add_shortcode( 'pp-latest-comic', $plugin_public, 'latest_comic_shortcode' );
+    $this->loader->add_action( 'pp_entry_meta', $plugin_public, 'get_entry_meta', 10);
+    $this->loader->add_action( 'pp_comics_pagination', $plugin_public, 'the_comics_pagination', 10);
+    $this->loader->add_shortcode( 'pp-latest-comic', $plugin_public, 'latest_comic_shortcode' );
 	}
 
 	/**
@@ -222,6 +248,16 @@ class Panel_Press {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Retreive the plugin options.
+	 *
+	 * @since     1.1.0
+	 * @return    array    The plugin options.
+	 */
+	public function get_plugin_options() {
+		return $this->plugin_options;
 	}
 
 }

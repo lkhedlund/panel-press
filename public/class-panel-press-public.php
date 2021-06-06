@@ -37,10 +37,11 @@ class Panel_Press_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $plugin_options ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->plugin_options = $plugin_options;
 
 	}
 
