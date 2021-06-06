@@ -14,7 +14,7 @@ A plugin to upload and display your comics on your Wordpress site.
 
 This plugin creates a new "comic" post type to organize and upload your comics to your Wordpress site. You can organize pages by "Collections" to create easier archive searching and functionality. 
 
-*NOTE:* This plugin is in active development. Please reach out if you have any issues, but be aware that not all functionality is stable and subject to change.
+*NOTE:* This plugin is in active development. Please reach out if you have any issues.
 
 Currently built for the 2020 theme, with other support coming in the future.
 

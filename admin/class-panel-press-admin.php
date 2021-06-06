@@ -119,6 +119,7 @@ class Panel_Press_Admin {
                 'has_archive' => true,
                 'exclude_from_search' => false,
                 'show_in_rest'  => true,
+								'show_admin_column' => true,
             )
         );
     }
