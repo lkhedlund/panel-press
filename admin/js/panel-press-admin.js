@@ -28,5 +28,19 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
-
+	$('body').on('click', '.pp-media-toggle', function(e) {
+		e.preventDefault();
+		let button = $(this);
+		let pp_media_uploader = null;
+		pp_media_uploader = wp.media({
+			title: button.data('modal-title'),
+			button: {
+				text: button.data('modal-button')
+			},
+			multiple: true
+		}).on('select', function() {
+			let attachment = pp_media_uploader.state().get('selection').first().toJSON();
+			button.prev().val(attachment[button.data('return')]);
+		}).open();
+	});
 })( jQuery );

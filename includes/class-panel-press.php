@@ -76,6 +76,7 @@ class Panel_Press {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->load_meta();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
@@ -112,6 +113,11 @@ class Panel_Press {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-panel-press-i18n.php';
 
 		/**
+		 * The class responsible for defining plugin metaboxes.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-panel-press-meta.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-panel-press-admin.php';
@@ -142,6 +148,21 @@ class Panel_Press {
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
 	}
+
+	    /**
+			 * Define the meta boxes for this plugin.
+			 *
+			 * Uses the Bp_Woocommerce_Notices_Meta class to register meta boxes.
+			 *
+			 * @since    1.0.0
+			 * @access   private
+			 */
+			private function load_meta() {
+				new Panel_Press_Meta();
+				
+				// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+				// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		}
 
 	/**
 	 * Register all of the hooks related to the admin area functionality
