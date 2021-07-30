@@ -309,28 +309,7 @@ class Panel_Press_Public {
         ob_start();
         get_the_id();
 
-        $comic_links = array(
-            'first' => array(
-                'ID' => get_posts( 'numberposts=1&order=ASC&post_type=pp-comic' )[0]->ID,
-                'icon' => 'chevrons-left',
-                'title' => 'First'
-            ),
-            'previous' => array(
-                'ID' => get_adjacent_post(false, '', true)->ID,
-                'icon' => 'chevron-left',
-                'title' => 'Previous'
-            ),
-            'next' => array(
-                'ID' => get_adjacent_post(false, '',false)->ID,
-                'icon' => 'chevron-right',
-                'title' => 'Next'
-            ),
-            'last' => array(
-                'ID' => get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID,
-                'icon' => 'chevrons-right',
-                'title' => 'Last'
-            ),
-        );
+        $comic_links = $this->get_comic_links();
         ?>
         <nav class="pp-pagination" aria-label="Comic" role="navigation">
             <?php
@@ -338,7 +317,7 @@ class Panel_Press_Public {
                 if ( $link['ID'] !== get_the_id() && ! empty($link['ID']) ) {
                     echo sprintf(
                         '<a href="%1$s" class="pp-pagination-link pp-pagination-link-%2$s"><i class="pp-icon pp-icon-%3$s"></i><span class="pagination-text">%4$s</span></a>',
-						esc_url( get_permalink( $link['ID'] ) ),
+												esc_url( get_permalink( $link['ID'] ) ),
                         esc_attr( strtolower( $link['title'] ) ),
                         esc_attr( $link['icon'] ),
                         esc_html( $link['title'] )
@@ -396,4 +375,58 @@ class Panel_Press_Public {
             return $output;
         }
     }
+
+		private function get_comic_links() {
+
+			$format = $this->plugin_options['format'];
+			switch($format):
+				case 'issue':
+					return array(
+							'first' => array(
+									'ID' => get_posts( 'numberposts=1&order=ASC&post_type=pp-comic' )[0]->ID,
+									'icon' => 'chevrons-left',
+									'title' => 'Previous issue'
+							),
+							'previous' => array(
+									'ID' => get_adjacent_post(false, '', true)->ID,
+									'icon' => 'chevron-left',
+									'title' => 'Previous page'
+							),
+							'next' => array(
+									'ID' => get_adjacent_post(false, '',false)->ID,
+									'icon' => 'chevron-right',
+									'title' => 'Next page'
+							),
+							'last' => array(
+								'ID' => get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID,
+								'icon' => 'chevrons-right',
+								'title' => 'Next issue'
+							)
+						);
+						break;
+				default: // Single
+					return array(
+						'first' => array(
+								'ID' => get_posts( 'numberposts=1&order=ASC&post_type=pp-comic' )[0]->ID,
+								'icon' => 'chevrons-left',
+								'title' => 'First'
+						),
+						'previous' => array(
+								'ID' => get_adjacent_post(false, '', true)->ID,
+								'icon' => 'chevron-left',
+								'title' => 'Previous'
+						),
+						'next' => array(
+								'ID' => get_adjacent_post(false, '',false)->ID,
+								'icon' => 'chevron-right',
+								'title' => 'Next'
+						),
+						'last' => array(
+								'ID' => get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID,
+								'icon' => 'chevrons-right',
+								'title' => 'Last'
+						)
+					);
+				endswitch;
+		}
 }

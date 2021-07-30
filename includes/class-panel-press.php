@@ -165,8 +165,8 @@ class Panel_Press {
 		// TODO: Refactor with enum support in 8.1
 
 		$this->plugin_options = [
-			'format' => 'issue', // strip
-		]
+			'format' => 'issue', // other options: single
+		];
 	}
 
 	/**
