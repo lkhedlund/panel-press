@@ -175,13 +175,16 @@ class Panel_Press {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-        $this->loader->add_filter( 'single_template', $plugin_public, 'load_comic_single_template' );
+		$this->loader->add_filter( 'single_template', $plugin_public, 'load_comic_single_template' );
+		// RSS feeds
+		$this->loader->add_filter( 'the_excerpt_rss', $plugin_public, 'add_comic_to_rss_feed', 20, 1);
+		$this->loader->add_filter( 'the_content_feed', $plugin_public, 'add_comic_to_rss_feed', 20, 1);
 
 		// Template hooks
 		$this->loader->add_action( 'pp_get_collection', $plugin_public, 'get_collection', 10, 1);
-        $this->loader->add_action( 'pp_entry_meta', $plugin_public, 'get_entry_meta', 10);
-        $this->loader->add_action( 'pp_comics_pagination', $plugin_public, 'the_comics_pagination', 10);
-        $this->loader->add_shortcode( 'pp-latest-comic', $plugin_public, 'latest_comic_shortcode' );
+		$this->loader->add_action( 'pp_entry_meta', $plugin_public, 'get_entry_meta', 10);
+		$this->loader->add_action( 'pp_comics_pagination', $plugin_public, 'the_comics_pagination', 10);
+		$this->loader->add_shortcode( 'pp-latest-comic', $plugin_public, 'latest_comic_shortcode' );
 	}
 
 	/**

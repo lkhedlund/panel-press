@@ -352,7 +352,7 @@ class Panel_Press_Public {
 		echo $output;
     }
 
-    /**
+  /**
 	 * Display the latest comic as a shortcode.
 	 *
 	 * @since    1.0.0
@@ -395,4 +395,17 @@ class Panel_Press_Public {
             return $output;
         }
     }
+
+  /**
+	 * Add comics to the rss feed.
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_comic_to_rss_feed( $content ) {
+		global $post;
+		if ( has_post_thumbnail( $post->ID ) ) {
+				$output = '<p>' . get_the_post_thumbnail( $post->ID, 'full' ) . '</p>';
+		}
+		return $output . $content;
+	}
 }
