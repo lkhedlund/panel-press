@@ -193,7 +193,7 @@ class Panel_Press_Admin {
      * @uses is_post_type_archive(), get_posts(), wp_redirect(), get_permalink()
 	 */
 	public static function redirect_comic_archive() {
-        if ( is_post_type_archive( 'pp-comic' ) ) {
+        if ( is_post_type_archive( 'pp-comic' ) && !is_feed() ) {
             $latest_id = get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID;
             if ( ! empty($latest_id) ) {
                 wp_redirect( get_permalink($latest_id), 301 );
