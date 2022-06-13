@@ -297,7 +297,33 @@ class Panel_Press_Public {
 		<?php $meta_output = ob_get_clean();
 
 		echo $meta_output;
-    }
+  }
+
+	/**
+	 * Gets the first comic from any collection.
+	 * 
+	 */
+	public function get_series_link($order = 'ASC') {
+		$collection_terms = get_the_terms( get_the_ID(), 'pp-collection' );
+
+		if ( !empty($collection_terms) && ! is_wp_error( $collection_terms ) ) :
+			$collections_query = new WP_Query( array( 
+				"posts_per_page" => 1,
+				"orderby" => 'date',
+				"order" => $order,
+				"tax_query" => array(
+					array (
+						'taxonomy' => 'pp-collection',
+						'field' => 'term_id',
+						'terms' => $collection_terms[0]->term_id,
+					),
+				),
+			) );
+		
+			return $collections_query->posts[0];
+		endif;
+	}
+		
     
     /**
 	 * Get the pagination to use for navigating between comic posts.
@@ -306,28 +332,30 @@ class Panel_Press_Public {
 	 */
 	public function the_comics_pagination($args = array()) {
         ob_start();
-        get_the_id();
+        $this_post_id = get_the_id();
+				$first_series_post_id = @$this->get_series_link('ASC')->ID;
+				$last_series_post_id = @$this->get_series_link('DESC')->ID;
 
         $comic_links = array(
             'first' => array(
-                'ID' => get_posts( 'numberposts=1&order=ASC&post_type=pp-comic' )[0]->ID,
+                'ID' => $first_series_post_id,
                 'icon' => 'chevrons-left',
-                'title' => 'First'
+                'title' => 'First',
             ),
             'previous' => array(
-                'ID' => get_adjacent_post(false, '', true)->ID,
+                'ID' => @get_adjacent_post(false, '', true)->ID,
                 'icon' => 'chevron-left',
-                'title' => 'Previous'
+                'title' => $first_series_post_id == $this_post_id ? 'Previous Series' : 'Previous'
             ),
             'next' => array(
-                'ID' => get_adjacent_post(false, '',false)->ID,
+                'ID' => @get_adjacent_post(false, '',false)->ID,
                 'icon' => 'chevron-right',
-                'title' => 'Next'
+                'title' => $last_series_post_id == $this_post_id ? 'Next Series' : 'Next'
             ),
             'last' => array(
-                'ID' => get_posts( 'numberposts=1&post_type=pp-comic' )[0]->ID,
+                'ID' => $last_series_post_id,
                 'icon' => 'chevrons-right',
-                'title' => 'Last'
+                'title' => 'Last',
             ),
         );
         ?>
